@@ -4,7 +4,8 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import com.sardogs.registerapp.data.Dog;
 import com.sardogs.registerapp.service.DogService;
 
+@RestController
 public class DogRestController {
 
     DogService ds;
@@ -26,14 +28,19 @@ public class DogRestController {
         return ds.getDogs();
     }
 
+    @GetMapping("/info")
+    public String getInfo() {
+        return ds.numberOfDogs();
+    }
+
     @PostMapping("/dog")
-    public String addDog(@RequestParam Dog dog) {
+    public String addDog(@RequestBody Dog dog) {
         ds.addDog(dog);
         return "Dog added";
     }
 
     @DeleteMapping("/deldog")
-    public String removeDog(@RequestParam Dog dog) {
+    public String removeDog(@RequestBody Dog dog) {
         ds.removeDog(dog.getId());
         return "Dog removed";
     }

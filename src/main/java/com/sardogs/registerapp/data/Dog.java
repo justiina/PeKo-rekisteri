@@ -11,19 +11,21 @@ public class Dog extends DogType {
     private String bDate;
     private LocalDate registerDate;
     private List<String> training;
-
+    
     public Dog() {
     }
 
-    public Dog(int id, int handlerId, String name) {
-        this(id, handlerId, name, null, List.of(""));
+    public Dog(int id, int handlerId, String name, String breed, String sex) {
+        this(id, handlerId, name, "", breed, sex, List.of(""));
     }
 
-    public Dog(int id, int handlerId, String name, String bDate, List<String> training) {
+    public Dog(int id, int handlerId, String name, String bDate, String breed, String sex, List<String> training) {
         this.id = id;
         this.handlerId = handlerId;
         this.name = name;
         this.bDate = bDate;
+        this.setBreed(breed);
+        this.setSex(sex);
         this.registerDate = LocalDate.now();
         this.training = training;
     }
@@ -72,9 +74,12 @@ public class Dog extends DogType {
         this.training = training;
     }
 
+    /*
+
     public int getAge() {
         Date today = new java.sql.Date(System.currentTimeMillis());
         Date birthDate = java.sql.Date.valueOf(this.bDate);
         return today.compareTo(birthDate);
     }
+    */
 }

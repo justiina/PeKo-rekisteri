@@ -1,11 +1,9 @@
 package com.sardogs.registerapp.service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-
 import com.sardogs.registerapp.data.Dog;
 
 @Service
@@ -13,14 +11,11 @@ public class DogService {
 
     private List<Dog> dogs = new ArrayList<>();
 
-    public DogService() {
-        dogs = Arrays.asList(
-            new Dog(1, 1, "Riki", "2015-07-27", List.of("Harjoitus-Virta", "HL", "JP")),
-            new Dog(2, 1, "Ramona", "2019-08-08", List.of("JP")),
-            new Dog(3, 2, "Pamela", "2021-12-03", List.of("")),
-            new Dog(4, 3, "Cooper", "2014-11-14", List.of("VIRTA","HL","JL"))
-        );
-
+    public DogService() {     
+        dogs.add(new Dog(1, 1, "Riki", "2015-07-27", "Mix", "Male", List.of("Harjoitus-VIRTA", "HL", "JP")));
+        dogs.add(new Dog(2, 1, "Ramona", "2019-08-08", "Lagotto romagnolo", "Female", List.of("JP")));
+        dogs.add(new Dog(3, 2, "Pamela", "2021-12-03", "Lagotto romagnolo", "Female", List.of("")));
+        dogs.add(new Dog(4, 3, "Cooper", "2014-11-14", "Lapponian herder", "Male", List.of("VIRTA","HL","JL")));
     }
 
     public void addDog(Dog dog) {
@@ -56,5 +51,9 @@ public class DogService {
             return dogs.remove(d);
         } 
         return false;
-    }   
+    }
+
+    public String numberOfDogs() {
+        return "Number of registered dogs: " + dogs.size();
+    }
 }

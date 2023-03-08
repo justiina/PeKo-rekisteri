@@ -9,8 +9,6 @@ public class DogHandler {
     private String fname;
     private String lname;
     private LocalDate registerDate;
-
-
     private List<String> training;
     
     public DogHandler() {
@@ -71,5 +69,9 @@ public class DogHandler {
 
     public void setTraining(List<String> training) {
         this.training = training;
+    }
+
+    public void addTraining(String training) {
+        this.training.add(training);
     }
 }

@@ -3,7 +3,6 @@ package com.sardogs.registerapp.data;
 public abstract class DogType {
     private String breed;
     private String sex;
-    
 
     public DogType() {
     }
