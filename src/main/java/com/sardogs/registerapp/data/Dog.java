@@ -1,8 +1,9 @@
 package com.sardogs.registerapp.data;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 
 public class Dog extends DogType {
     private int id;
@@ -74,12 +75,10 @@ public class Dog extends DogType {
         this.training = training;
     }
 
-    /*
-
-    public int getAge() {
-        Date today = new java.sql.Date(System.currentTimeMillis());
-        Date birthDate = java.sql.Date.valueOf(this.bDate);
-        return today.compareTo(birthDate);
+    public int dogAge() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate today = LocalDate.now();  
+        LocalDate birthDate = LocalDate.parse(this.bDate, formatter);
+        return Period.between(birthDate, today).getYears();
     }
-    */
 }

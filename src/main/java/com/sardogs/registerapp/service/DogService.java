@@ -56,4 +56,15 @@ public class DogService {
     public String numberOfDogs() {
         return "Number of registered dogs: " + dogs.size();
     }
+
+    public double meanDogAge() {
+        double ageSum = 0;
+        for (Dog dog : dogs) {
+            ageSum += dog.dogAge();
+        }
+        double meanAge = ageSum / dogs.size();
+
+        return meanAge;
+    }
+
 }

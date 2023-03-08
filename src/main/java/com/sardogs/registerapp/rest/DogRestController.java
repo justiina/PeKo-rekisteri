@@ -47,11 +47,22 @@ public class DogRestController {
 
     @GetMapping("/dog/{id}")
     public ResponseEntity<Dog> getDog(@PathVariable int id) {
-        Dog p = ds.findDog(id);
+        Dog d = ds.findDog(id);
 
-        if(p != null) {
-            return new ResponseEntity<>(p, HttpStatus.OK);
+        if(d != null) {
+            return new ResponseEntity<>(d, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }    
+    }
+
+    @GetMapping("/dogage/{id}")
+    public String dogAge(@PathVariable int id) {
+        Dog d = ds.findDog(id);
+        return d.getName() +" is: " + d.dogAge() + " years old.";
+    }
+
+    @GetMapping("/meanage")
+    public String meanAge() {        
+        return "Mean age of all dogs is: " + ds.meanDogAge() + " years.";
+    }
 }
