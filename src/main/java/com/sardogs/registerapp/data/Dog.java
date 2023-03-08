@@ -1,31 +1,30 @@
 package com.sardogs.registerapp.data;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public class Dog extends DogType {
     private int id;
     private int handlerId;
     private String name;
-    private Date bDate;
-    private Date registerDate;
+    private String bDate;
+    private LocalDate registerDate;
     private List<String> training;
 
     public Dog() {
     }
 
     public Dog(int id, int handlerId, String name) {
-        this.id = id;
-        this.handlerId = handlerId;
-        this.name = name;
+        this(id, handlerId, name, null, List.of(""));
     }
 
-    public Dog(int id, int handlerId, String name, Date bDate, Date registerDate, List<String> training) {
+    public Dog(int id, int handlerId, String name, String bDate, List<String> training) {
         this.id = id;
         this.handlerId = handlerId;
         this.name = name;
         this.bDate = bDate;
-        this.registerDate = registerDate;
+        this.registerDate = LocalDate.now();
         this.training = training;
     }
 
@@ -53,20 +52,16 @@ public class Dog extends DogType {
         this.name = name;
     }
 
-    public Date getBDate() {
+    public String getBDate() {
         return this.bDate;
     }
 
-    public void setBDate(Date bDate) {
+    public void setBDate(String bDate) {
         this.bDate = bDate;
     }
 
-    public Date getRegisterDate() {
+    public LocalDate getRegisterDate() {
         return registerDate;
-    }
-
-    public void setRegisterDate(Date registerDate) {
-        this.registerDate = registerDate;
     }
 
     public List<String> getTraining() {
@@ -75,5 +70,11 @@ public class Dog extends DogType {
 
     public void setTraining(List<String> training) {
         this.training = training;
+    }
+
+    public int getAge() {
+        Date today = new java.sql.Date(System.currentTimeMillis());
+        Date birthDate = java.sql.Date.valueOf(this.bDate);
+        return today.compareTo(birthDate);
     }
 }

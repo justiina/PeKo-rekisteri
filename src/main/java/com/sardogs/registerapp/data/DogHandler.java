@@ -1,6 +1,6 @@
 package com.sardogs.registerapp.data;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public class DogHandler {
@@ -8,19 +8,25 @@ public class DogHandler {
     private int dogId;
     private String fname;
     private String lname;
-    private Date bDate;
+    private LocalDate registerDate;
+
+
     private List<String> training;
     
     public DogHandler() {
     }
 
-    public DogHandler(int id, int dogId, String fname, String lname, Date bDate, List<String> training) {
+    public DogHandler(int id, int dogId, String fname, String lname, List<String> training) {
         this.id = id;
         this.dogId = dogId;
         this.fname = fname;
         this.lname = lname;
-        this.bDate = bDate;
+        this.registerDate = LocalDate.now();
         this.training = training;
+    }
+    
+    public DogHandler(int id, String fname, String lname) {
+        this(id, 9999, fname, lname, List.of(""));
     }
 
     public int getId() {
@@ -55,12 +61,8 @@ public class DogHandler {
         this.lname = lname;
     }
 
-    public Date getBDate() {
-        return this.bDate;
-    }
-
-    public void setBDate(Date bDate) {
-        this.bDate = bDate;
+    public LocalDate getRegisterDate() {
+        return registerDate;
     }
 
     public List<String> getTraining() {
