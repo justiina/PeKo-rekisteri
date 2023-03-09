@@ -1,22 +1,23 @@
 package com.sardogs.registerapp.data;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
-public class Dog extends DogType {
+public class Dog extends BasicInfo {
     private int id;
     private int handlerId;
     private String name;
+    private String breed;
+    private String sex;
     private String bDate;
-    private LocalDate registerDate;
-    private List<String> training;
     
     public Dog() {
-        this(9999,9999,"","","","", List.of(""));
+        this(9999,9999,"","","","", new ArrayList<String>());
     }
 
     public Dog(int id, int handlerId, String name, String breed, String sex) {
-        this(id, handlerId, name, "", breed, sex, List.of(""));
+        this(id, handlerId, name, "", breed, sex, new ArrayList<String>());
     }
 
     public Dog(int id, int handlerId, String name, String bDate, String breed, String sex, List<String> training) {
@@ -24,10 +25,10 @@ public class Dog extends DogType {
         this.handlerId = handlerId;
         this.name = name;
         this.bDate = bDate;
-        this.setBreed(breed);
-        this.setSex(sex);
-        this.registerDate = LocalDate.now();
-        this.training = training;
+        this.breed = breed;
+        this.sex = sex;
+        this.setRegisterDate(LocalDate.now());
+        this.setTraining(training);
     }
 
     public int getId() {
@@ -54,6 +55,22 @@ public class Dog extends DogType {
         this.name = name;
     }
 
+    public String getBreed() {
+        return this.breed;
+    }
+
+    public void setBreed(String breed) {
+        this.breed = breed;
+    }
+
+    public String getSex() {
+        return this.sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
     public String getBDate() {
         return this.bDate;
     }
@@ -61,18 +78,5 @@ public class Dog extends DogType {
     public void setBDate(String bDate) {
         this.bDate = bDate;
     }
-
-    public LocalDate getRegisterDate() {
-        return registerDate;
-    }
-
-    public List<String> getTraining() {
-        return this.training;
-    }
-
-    public void setTraining(List<String> training) {
-        this.training = training;
-    }
-
 
 }

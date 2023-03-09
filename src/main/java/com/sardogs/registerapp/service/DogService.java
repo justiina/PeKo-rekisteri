@@ -17,14 +17,14 @@ public class DogService {
     private List<Dog> dogs = new ArrayList<>();
 
     public DogService() {   
-        handlers.add(new DogHandler(1, "Justiina", "Ronkainen", List.of("EA1", "Etsinnän peruskurssi")));
-        handlers.add(new DogHandler(2, "Jokke", "Luikku", List.of("")));
-        handlers.add(new DogHandler(3, "Liisa", "Ihme", List.of("EA1", "Etsinnän peruskurssi", "Jäljen kouluttajakoulutus")));
+        handlers.add(new DogHandler(1, "Justiina", "Ronkainen", new ArrayList<String>(List.of("EA1", "Etsinnän peruskurssi"))));
+        handlers.add(new DogHandler(2, "Jokke", "Luikku", new ArrayList<String>()));
+        handlers.add(new DogHandler(3, "Liisa", "Ihme", new ArrayList<String>(List.of("EA1", "Etsinnän peruskurssi", "Jäljen kouluttajakoulutus"))));
 
-        dogs.add(new Dog(1, 1, "Riki", "2015-07-27", "Mix", "Male", List.of("Harjoitus-VIRTA", "HL", "JP")));
-        dogs.add(new Dog(2, 1, "Ramona", "2019-08-08", "Lagotto romagnolo", "Female", List.of("JP")));
-        dogs.add(new Dog(3, 2, "Pamela", "2021-12-03", "Lagotto romagnolo", "Female", List.of("")));
-        dogs.add(new Dog(4, 3, "Cooper", "2014-11-14", "Lapponian herder", "Male", List.of("VIRTA","HL","JL")));
+        dogs.add(new Dog(1, 1, "Riki", "2015-07-27", "Mix", "Male", new ArrayList<String>(List.of("Harjoitus-VIRTA", "HL", "JP"))));
+        dogs.add(new Dog(2, 1, "Ramona", "2019-08-08", "Lagotto romagnolo", "Female", new ArrayList<String>(List.of("JP"))));
+        dogs.add(new Dog(3, 2, "Pamela", "2021-12-03", "Lagotto romagnolo", "Female", new ArrayList<String>()));
+        dogs.add(new Dog(4, 3, "Cooper", "2014-11-14", "Lapponian herder", "Male", new ArrayList<String>(List.of("VIRTA","HL","JL"))));
 
     }
 
@@ -109,12 +109,11 @@ public class DogService {
     public double meanDogAge() {
         double ageSum = 0;
         for (Dog dog : dogs) {
-            ageSum += getAge(dog.getId());
+            if(dog != null) {
+                ageSum += getAge(dog.getId());
+            }
         }
         double meanAge = ageSum / dogs.size();
         return meanAge;
     }
-
-
-
 }

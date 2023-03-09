@@ -60,6 +60,42 @@ public class DogRestController {
         return "Dog added";
     }
 
+    // Get dog's current trainings
+    @GetMapping("/dogtrainings/{id}")
+    public List<String> getDogTraining(@PathVariable int id) {
+        Dog dog = ds.findDog(id);
+        return dog.getTraining();
+    }
+
+    // Get dog handler's current trainings
+    @GetMapping("/handlertrainings/{id}")
+    public List<String> getHandlerTraining(@PathVariable int id) {
+        DogHandler handler = ds.findHandler(id);
+        return handler.getTraining();
+    }
+
+    // Add training for a dog
+    @PostMapping("/adddogtraining/{id}")
+    public String addDogTraining(@PathVariable int id, @RequestBody String training) {
+        Dog dog = ds.findDog(id);
+        if(dog != null) {
+            dog.addTraining(training);
+            return "Training added"; 
+        }
+        return "Dog id was not found";
+    }
+
+    // Add training for a dog handler
+    @PostMapping("/addhandlertraining/{id}")
+    public String addHandlerTraining(@PathVariable int id, @RequestBody String training) {
+        DogHandler handler = ds.findHandler(id);
+        if(handler != null) {
+            handler.addTraining(training);
+            return "Training added"; 
+        }
+        return "Dog handler id was not found";
+    }
+
     // Remove dogs and dog handlers
     @DeleteMapping("/delhandler")
     public String removeHandler(@RequestBody DogHandler handler) {
