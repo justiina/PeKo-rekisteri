@@ -5,18 +5,17 @@ import java.util.List;
 
 public class DogHandler {
     private int id;
-    private int dogId;
     private String fname;
     private String lname;
     private LocalDate registerDate;
     private List<String> training;
     
     public DogHandler() {
+        this(9999,"","",List.of(""));
     }
 
-    public DogHandler(int id, int dogId, String fname, String lname, List<String> training) {
+    public DogHandler(int id, String fname, String lname, List<String> training) {
         this.id = id;
-        this.dogId = dogId;
         this.fname = fname;
         this.lname = lname;
         this.registerDate = LocalDate.now();
@@ -24,7 +23,7 @@ public class DogHandler {
     }
     
     public DogHandler(int id, String fname, String lname) {
-        this(id, 9999, fname, lname, List.of(""));
+        this(id, fname, lname, List.of(""));
     }
 
     public int getId() {
@@ -33,14 +32,6 @@ public class DogHandler {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getDogId() {
-        return this.dogId;
-    }
-
-    public void setDogId(int dogId) {
-        this.dogId = dogId;
     }
 
     public String getFname() {
