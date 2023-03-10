@@ -60,6 +60,23 @@ public class DogRestController {
         return "Dog added";
     }
 
+    // Update dogs and dog handlers
+    @PostMapping("/handlerupdate/{id}")
+    public String updateHandler(@PathVariable int id, @RequestBody DogHandler newHandler) {
+        if(ds.updateHandler(id, newHandler) != null) {
+            return "Dog handler updated"; 
+        }
+        return "Dog handler id was not found";
+    }
+
+    @PostMapping("/dogupdate/{id}")
+    public String updateDog(@PathVariable int id, @RequestBody Dog newDog) {
+        if(ds.updateDog(id, newDog) != null) {
+            return "Dog updated"; 
+        }
+        return "Dog id was not found";
+    }
+
     // Get dog's current trainings
     @GetMapping("/dogtrainings/{id}")
     public List<String> getDogTraining(@PathVariable int id) {
@@ -137,14 +154,14 @@ public class DogRestController {
     // Get one dogs age
     @GetMapping("/dogage/{id}")
     public String dogAge(@PathVariable int id) {
-        Dog dog = ds.findDog(id);
-        if(dog != null) {
+        if(ds.getAge(id) != 999) {
             if(ds.getAge(id) > 1) {
-                return dog.getName() +" is " + ds.getAge(id) + " years old.";
+                return ds.getDogName(id) + " is " + ds.getAge(id) + " years old";
             }
-            return dog.getName() +" is " + ds.getAge(id) + " year old.";
+            return ds.getDogName(id) + " is " + ds.getAge(id) + " year old";
+
         }
-        return "Dog id was not found";        
+        return "Dog id was not found";     
     }
 
     // Get mean age of all registered dogs

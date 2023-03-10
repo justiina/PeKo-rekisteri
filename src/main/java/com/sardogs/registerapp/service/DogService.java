@@ -28,6 +28,7 @@ public class DogService {
 
     }
 
+    // Add and get dogs and dog handlers
     public void addHandler(DogHandler handler) {
         handlers.add(handler);
     }
@@ -44,6 +45,36 @@ public class DogService {
         return new ArrayList<>(dogs);
     }
 
+    // Get dog's name by id
+    public String getDogName(int id) {
+        Dog dog = findDog(id);
+        return dog.getName();
+    }
+
+    // Update dogs and dog handlers
+    public DogHandler updateHandler(int id, DogHandler newData) {
+        DogHandler handler = findHandler(id);
+        newData.setId(id);
+        if(handler != null) {
+            newData.setRegisterDate(handler.getRegisterDate());
+            handlers.set(handlers.indexOf(handler), newData);
+            return newData;
+        }
+        return null;
+    }
+
+    public Dog updateDog(int id, Dog newData) {
+        Dog dog = findDog(id);
+        newData.setId(id);
+        if(dog != null) {
+            newData.setRegisterDate(dog.getRegisterDate());
+            dogs.set(dogs.indexOf(dog), newData);
+            return newData;
+        }
+        return null;
+    }
+
+    // Get one dog handlers dogs
     public List<Dog> getDogsByHandler(int handlerId) {
         List<Dog> newDogs = new ArrayList<>();
         for (Dog dog : dogs) {
@@ -54,6 +85,7 @@ public class DogService {
         return new ArrayList<>(newDogs);
     }
 
+    // Find dog and dog handler by id
     public DogHandler findHandler(int id) {
         for (DogHandler handler : handlers) {
             if(handler.getId() == id) {
@@ -72,6 +104,7 @@ public class DogService {
         return null;
     }
 
+    // Remove dog and dog handler
     public boolean removeHandler(int id) {
         DogHandler handler = findHandler(id);
     
@@ -90,6 +123,7 @@ public class DogService {
         return false;
     }
 
+    // Get number of registered dogs and dog handlers
     public int numberOfHandlers() {
         return handlers.size();
     }
@@ -98,13 +132,20 @@ public class DogService {
         return dogs.size();
     }
 
+    // Calculate age of the dog from birth date and current date
     public int getAge(int id) {
         Dog dog = findDog(id);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate today = LocalDate.now();  
-        LocalDate birthDate = LocalDate.parse(dog.getBDate(), formatter);
-        return Period.between(birthDate, today).getYears();
+        if(dog != null) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate today = LocalDate.now();  
+            LocalDate birthDate = LocalDate.parse(dog.getBDate(), formatter);
+            return Period.between(birthDate, today).getYears();
+        }
+        return 999;
+
     }
+
+    
 
     public double meanDogAge() {
         double ageSum = 0;
