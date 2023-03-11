@@ -93,23 +93,19 @@ public class DogRestController {
 
     // Add training for a dog
     @PostMapping("/adddogtraining/{id}")
-    public String addDogTraining(@PathVariable int id, @RequestBody String training) {
-        Dog dog = ds.findDog(id);
-        if(dog != null) {
-            dog.addTraining(training);
-            return "Training added"; 
-        }
+    public String addTrainingDog(@PathVariable int id, @RequestBody String training) {
+        if(ds.addDogTraining(id, training) == true) {
+            return "Training added";
+        } 
         return "Dog id was not found";
     }
 
     // Add training for a dog handler
     @PostMapping("/addhandlertraining/{id}")
-    public String addHandlerTraining(@PathVariable int id, @RequestBody String training) {
-        DogHandler handler = ds.findHandler(id);
-        if(handler != null) {
-            handler.addTraining(training);
-            return "Training added"; 
-        }
+    public String addTrainingHandler(@PathVariable int id, @RequestBody String training) {
+        if(ds.addHandlerTraining(id, training) == true) {
+            return "Training added";
+        } 
         return "Dog handler id was not found";
     }
 
@@ -167,6 +163,6 @@ public class DogRestController {
     // Get mean age of all registered dogs
     @GetMapping("/meanage")
     public String meanAge() {        
-        return "Mean age of all registered dogs is: " + ds.meanDogAge() + " years.";
+        return "Mean age of all registered dogs is " + ds.meanDogAge() + " years.";
     }
 }

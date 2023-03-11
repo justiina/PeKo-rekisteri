@@ -74,6 +74,23 @@ public class DogService {
         return null;
     }
 
+    // Add training
+    public boolean addHandlerTraining(int id, String training) {
+        DogHandler hanlder = findHandler(id);
+        if(hanlder != null) {
+            return hanlder.addTraining(training);
+        }
+        return false;
+    }
+
+    public boolean addDogTraining(int id, String training) {
+        Dog dog = findDog(id);
+        if(dog != null) {
+            return dog.addTraining(training);
+        }
+        return false;
+    }
+
     // Get one dog handlers dogs
     public List<Dog> getDogsByHandler(int handlerId) {
         List<Dog> newDogs = new ArrayList<>();
@@ -144,8 +161,6 @@ public class DogService {
         return 999;
 
     }
-
-    
 
     public double meanDogAge() {
         double ageSum = 0;

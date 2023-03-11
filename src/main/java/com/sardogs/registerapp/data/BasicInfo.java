@@ -31,8 +31,8 @@ public abstract class BasicInfo {
         this.training = training;
     }
 
-    public void addTraining(String training) {
-        this.training.add(training);
+    public boolean addTraining(String training) {
+        return this.training.add(training);
     }
 }
 
